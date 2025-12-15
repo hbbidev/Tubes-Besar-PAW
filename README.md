@@ -1,12 +1,12 @@
-# 🎮 GamerTopup - Platform Topup Game
+# 🎮 KidPedia - Platform Topup Game
 
-GamerTopup adalah aplikasi web berbasis **Laravel** yang menyediakan layanan **topup game otomatis**. Aplikasi ini terintegrasi dengan **Midtrans Payment Gateway** untuk pembayaran instan (QRIS, E-Wallet, Virtual Account) dan dilengkapi dengan **panel admin** untuk manajemen konten dan transaksi.
+KidPedia adalah aplikasi web berbasis **Laravel** yang menyediakan layanan **topup game otomatis**. Aplikasi ini terintegrasi dengan **Midtrans Payment Gateway** untuk pembayaran instan (QRIS, E-Wallet, Virtual Account) dan dilengkapi dengan **panel admin** untuk manajemen konten dan transaksi.
 
 ---
 
-## ✨ Fitur Utama
+## Fitur Utama
 
-### 👤 Halaman Pengguna (Public & Member)
+### Halaman Pengguna (Public & Member)
 
 * **Landing Page Modern**
   Desain responsif menggunakan Tailwind CSS, hero slider, dan efek animasi.
@@ -27,7 +27,7 @@ GamerTopup adalah aplikasi web berbasis **Laravel** yang menyediakan layanan **t
 
 ---
 
-### 🛡️ Panel Admin
+### Panel Admin
 
 * **Dashboard Statistik**
   Ringkasan pendapatan dan jumlah transaksi.
@@ -40,9 +40,9 @@ GamerTopup adalah aplikasi web berbasis **Laravel** yang menyediakan layanan **t
 
 ---
 
-## 🛠️ Teknologi yang Digunakan
+## Teknologi yang Digunakan
 
-* **Framework** : Laravel 10 / 11
+* **Framework** : Laravel 11
 * **Bahasa** : PHP 8.1+
 * **Database** : MySQL
 * **Frontend** : Blade Templating + Tailwind CSS
