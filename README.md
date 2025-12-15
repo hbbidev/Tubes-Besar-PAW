@@ -1,59 +1,121 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+Panduan Instalasi & Menjalankan Project (Clone to Serve)
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Panduan ini digunakan jika Anda ingin menjalankan project ini di komputer lain atau setelah mendownloadnya dari GitHub.
 
-## About Laravel
+Prasyarat (Wajib Install Dulu)
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+XAMPP (Untuk Database MySQL).
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Composer (Untuk install library PHP).
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Git (Untuk clone repository).
 
-## Learning Laravel
+Langkah 1: Clone Repository
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+Buka terminal (CMD / Git Bash) di folder di mana Anda ingin menyimpan project, lalu jalankan:
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+git clone [https://github.com/USERNAME_GITHUB/NAMA_REPO.git](https://github.com/USERNAME_GITHUB/NAMA_REPO.git)
+cd gamertopup
 
-## Laravel Sponsors
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+(Ganti URL dengan link repository GitHub Anda).
 
-### Premium Partners
+Langkah 2: Install Dependencies (Library)
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+Karena folder /vendor tidak ikut diupload ke GitHub, kita harus menginstallnya ulang.
 
-## Contributing
+composer install
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
 
-## Code of Conduct
+Tunggu hingga proses download selesai.
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+Langkah 3: Konfigurasi Environment (.env)
 
-## Security Vulnerabilities
+File .env berisi settingan rahasia (password database, API Key) yang tidak ada di GitHub. Kita harus membuatnya dari file contoh.
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Duplikat file contoh:
 
-## License
+cp .env.example .env
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+(Jika di Windows CMD tidak bisa perintah cp, lakukan copy-paste manual file .env.example, lalu rename hasil copy menjadi .env).
+
+Generate App Key:
+
+php artisan key:generate
+
+
+Edit file .env:
+Buka file .env dengan text editor (Notepad/VS Code), lalu atur bagian ini:
+
+A. Database:
+
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=db_gamertopup  <-- Pastikan nama ini sama dengan di phpMyAdmin
+DB_USERNAME=root
+DB_PASSWORD=
+
+
+B. Midtrans (Wajib diisi agar tidak error):
+
+MIDTRANS_SERVER_KEY=SB-Mid-server-xxxxxxxxx
+MIDTRANS_CLIENT_KEY=SB-Mid-client-xxxxxxxxx
+MIDTRANS_IS_PRODUCTION=false
+
+
+Langkah 4: Siapkan Database
+
+Nyalakan XAMPP (Apache & MySQL).
+
+Buka browser ke http://localhost/phpmyadmin.
+
+Buat database baru dengan nama: db_gamertopup.
+
+Langkah 5: Migrasi & Seeding
+
+Ini akan membuat tabel-tabel di database dan mengisinya dengan data awal (Admin, Game, Payment).
+
+php artisan migrate:fresh --seed
+
+
+Jika berhasil, akan muncul tulisan "DONE" hijau banyak dan "Seeding database completed".
+
+Langkah 6: Jalankan Server (Serve)
+
+Terakhir, jalankan server Laravel.
+
+Bersihkan cache dulu (supaya settingan .env terbaca):
+
+php artisan optimize:clear
+
+
+Jalankan server:
+
+php artisan serve
+
+
+Buka browser dan akses: http://127.0.0.1:8000
+
+🎉 Akun Login
+
+Gunakan akun ini untuk masuk:
+
+Role
+
+Email
+
+Password
+
+Admin
+
+admin@toko.com
+
+password123
+
+Member
+
+member@gmail.com
+
+password123
