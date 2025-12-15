@@ -150,8 +150,8 @@ Akses aplikasi di browser:
 
 | Role  | Email                                       | Password    |
 | ----- | ------------------------------------------- | ----------- |
-| Admin | [admin@toko.com](mailto:admin@toko.com)     | password123 |
-| User  | [member@gmail.com](mailto:member@gmail.com) | password123 |
+| Admin | [admin@gmail.com](mailto:admin@gmail.com)     | admin |
+| User  | [user@gmail.com](mailto:user@gmail.com) | user |
 
 ---
 
