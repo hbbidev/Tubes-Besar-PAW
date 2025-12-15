@@ -4,9 +4,9 @@ KidPedia adalah aplikasi web berbasis **Laravel** yang menyediakan layanan **top
 
 ---
 
-## Fitur Utama
+## ✨ Fitur Utama
 
-### Halaman Pengguna (Public & Member)
+### 👤 Halaman Pengguna (Public & Member)
 
 * **Landing Page Modern**
   Desain responsif menggunakan Tailwind CSS, hero slider, dan efek animasi.
@@ -27,7 +27,7 @@ KidPedia adalah aplikasi web berbasis **Laravel** yang menyediakan layanan **top
 
 ---
 
-### Panel Admin
+### 🛡️ Panel Admin
 
 * **Dashboard Statistik**
   Ringkasan pendapatan dan jumlah transaksi.
@@ -40,9 +40,9 @@ KidPedia adalah aplikasi web berbasis **Laravel** yang menyediakan layanan **top
 
 ---
 
-## Teknologi yang Digunakan
+## 🛠️ Teknologi yang Digunakan
 
-* **Framework** : Laravel 11
+* **Framework** : Laravel 10 / 11
 * **Bahasa** : PHP 8.1+
 * **Database** : MySQL
 * **Frontend** : Blade Templating + Tailwind CSS
@@ -68,7 +68,7 @@ Pastikan sudah terinstall:
 ### 2️⃣ Clone Repository
 
 ```bash
-git clone https://github.com/USERNAME_GITHUB_ANDA/gamertopup.git
+git clone https://github.com/hbbidev/Tubes-Besar-PAW.git
 cd gamertopup
 ```
 
@@ -150,8 +150,8 @@ Akses aplikasi di browser:
 
 | Role  | Email                                       | Password    |
 | ----- | ------------------------------------------- | ----------- |
-| Admin | [admin@gmail.com](mailto:admin@gmail.com)     | admin |
-| User  | [user@gmail.com](mailto:user@gmail.com) | user |
+| Admin | [admin@toko.com](mailto:admin@toko.com)     | password123 |
+| User  | [member@gmail.com](mailto:member@gmail.com) | password123 |
 
 ---
 
@@ -176,9 +176,203 @@ https://url-ngrok-anda.app/midtrans/callback
 
 ---
 
+## 🖥️ Setup Deployment di Server Linux (Production)
+
+Panduan singkat untuk menjalankan **GamerTopup** di server Linux (Ubuntu 20.04 / 22.04 / 24.04).
+
+---
+
+### 1️⃣ Spesifikasi & Prasyarat Server
+
+Pastikan server memiliki:
+
+* OS: Ubuntu Server 20.04+ / 22.04 / 24.04
+* PHP: 8.1+
+* Web Server: Nginx / Apache
+* Database: MySQL / MariaDB
+* Composer
+* Git
+
+---
+
+### 2️⃣ Install Paket Dasar
+
+```bash
+sudo apt update && sudo apt upgrade -y
+sudo apt install -y nginx git unzip curl mysql-server
+```
+
+---
+
+### 3️⃣ Install PHP & Extension
+
+```bash
+sudo apt install -y php php-cli php-fpm php-mysql php-mbstring php-xml php-bcmath php-curl php-zip
+```
+
+Cek versi PHP:
+
+```bash
+php -v
+```
+
+---
+
+### 4️⃣ Install Composer
+
+```bash
+curl -sS https://getcomposer.org/installer | php
+sudo mv composer.phar /usr/local/bin/composer
+composer --version
+```
+
+---
+
+### 5️⃣ Clone Project ke Server
+
+```bash
+cd /var/www
+git clone https://github.com/hbbidev/Tubes-Besar-PAW.git
+cd kidpedia
+```
+
+---
+
+### 6️⃣ Install Dependency Laravel
+
+```bash
+composer install --no-dev --optimize-autoloader
+```
+
+---
+
+### 7️⃣ Konfigurasi Environment Server
+
+```bash
+cp .env.example .env
+nano .env
+```
+
+Sesuaikan konfigurasi **production**:
+
+```env
+APP_NAME=GamerTopup
+APP_ENV=production
+APP_DEBUG=false
+APP_URL=https://domain-anda.com
+
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=db_gamertopup
+DB_USERNAME=db_user
+DB_PASSWORD=db_password
+
+MIDTRANS_SERVER_KEY=Mid-server-production-xxxx
+MIDTRANS_CLIENT_KEY=Mid-client-production-xxxx
+MIDTRANS_IS_PRODUCTION=true
+```
+
+---
+
+### 8️⃣ Generate Key & Migrasi Database
+
+```bash
+php artisan key:generate
+php artisan migrate --force
+```
+
+---
+
+### 9️⃣ Permission Folder Laravel
+
+```bash
+sudo chown -R www-data:www-data /var/www/kidpedia
+sudo chmod -R 775 storage bootstrap/cache
+```
+
+---
+
+### 🔟 Konfigurasi Nginx
+
+Buat config virtual host:
+
+```bash
+sudo nano /etc/nginx/sites-available/kidpedia
+```
+
+Isi konfigurasi:
+
+```nginx
+server {
+    listen 80;
+    server_name domain-anda.com;
+    root /var/www/kidpedia/public;
+
+    index index.php index.html;
+
+    location / {
+        try_files $uri $uri/ /index.php?$query_string;
+    }
+
+    location ~ \.php$ {
+        include snippets/fastcgi-php.conf;
+        fastcgi_pass unix:/run/php/php8.1-fpm.sock;
+    }
+
+    location ~ /\. {
+        deny all;
+    }
+}
+```
+
+Aktifkan site:
+
+```bash
+sudo ln -s /etc/nginx/sites-available/kidpedia /etc/nginx/sites-enabled/
+sudo nginx -t
+sudo systemctl reload nginx
+```
+
+---
+
+### 1️⃣1️⃣ Optimasi Laravel Production
+
+```bash
+php artisan config:clear
+php artisan config:cache
+php artisan route:cache
+php artisan view:cache
+```
+
+---
+
+### 1️⃣2️⃣ (Opsional) Setup HTTPS SSL
+
+Gunakan **Certbot** untuk SSL gratis:
+
+```bash
+sudo apt install certbot python3-certbot-nginx -y
+sudo certbot --nginx -d domain-anda.com
+```
+
+---
+
+### ✅ Selesai
+
+Aplikasi dapat diakses melalui:
+
+👉 **[https://domain-anda.com](https://domain-anda.com)**
+
+---
+
 ## 📝 Lisensi
 
 Project ini bersifat **open-source** dan dirilis di bawah **MIT License**.
+
+---
+
+🚀 **KidPedia siap dijalankan di Localhost maupun Production Server Linux.**
 
 ---
 
