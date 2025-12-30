@@ -69,7 +69,7 @@ Pastikan sudah terinstall:
 
 ```bash
 git clone https://github.com/hbbidev/Tubes-Besar-PAW.git
-cd gamertopup
+cd Tubes-Besar-PAW
 ```
 
 ---
@@ -233,7 +233,7 @@ composer --version
 ```bash
 cd /var/www
 git clone https://github.com/hbbidev/Tubes-Besar-PAW.git
-cd kidpedia
+cd Tubes-Besar-PAW
 ```
 
 ---
